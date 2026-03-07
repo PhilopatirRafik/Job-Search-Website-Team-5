@@ -21,37 +21,63 @@
 
 <h1>Apply for Job</h1>
 
-<h3>Frontend Developer - Google</h3>
+<form action="user_applied_jobs.html">
 
-<form>
+<label>Select Job:</label><br>
+
+<select name="job" required>
+
+<option value="">Choose a Job</option>
+
+<option>Frontend Developer - Google</option>
+
+<option>Backend Developer - Amazon</option>
+
+<option>UI Designer - Microsoft</option>
+
+<option>Data Analyst - Meta</option>
+
+</select>
+
+<br><br>
 
 <label>Full Name:</label><br>
 <input type="text" name="fullname" required>
+
 <br><br>
 
 <label>Email:</label><br>
 <input type="email" name="email" required>
+
 <br><br>
 
 <label>Phone Number:</label><br>
 <input type="tel" name="phone">
+
 <br><br>
 
 <label>Years of Experience:</label><br>
 <input type="number" name="experience">
+
 <br><br>
 
 <label>Upload CV Link:</label><br>
 <input type="url" name="cv">
+
 <br><br>
 
 <label>Cover Letter:</label><br>
 <textarea name="cover_letter" rows="4" cols="40"></textarea>
+
 <br><br>
 
 <button type="submit">Apply</button>
 
 </form>
+
+<br>
+
+<a href="search_jobs.html">Back to Jobs</a>
 
 </body>
 

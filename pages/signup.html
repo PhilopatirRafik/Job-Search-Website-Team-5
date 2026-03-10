@@ -1,17 +1,55 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
 <body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign Up</a>
+    </nav>
+    <div class="container">
+        <h2>Sign Up</h2>
+    <form>
+        <label for="username">Username</label><br>
+        <input type="text" id="username" required><br>
+         <label for="email">Email</label><br>
+        <input type="email" id="email" required><br>
+        <label for="phone">Phone Number</label><br>
+        <input type="tel" id="phone" required><br>
+        <label for ="password">Password</label><br>
+        <input type ="password" id="password" required><br>
+        <label for="confirm-password">Confirm Password</label><br>
+        <input type="password" id="confirm-password" required><br>
 
-<nav>
+        <label for="gender">Gender</label><br>
 
-<a href="../index.html">Home</a>
-
-<a href="login.html">Login</a>
-
-<a href="signup.html">Sign Up</a>
-
-</nav>
+        <input type="radio" id="male" name="gender" value="Male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="Female">
+        <label for="female">Female</label><br><br>
+        <label for="country">Country</label><br>
+        <select id="country" name="country" required>
+            <option value="">Select Country</option>
+            <option value="Egypt">Egypt</option>
+            <option value="soudi-arabia">Saudi Arabia</option>
+            <option value="kuwait">Kuwait</option>
+            <option value="emarat">United Arab Emirates</option>
+            <option value="qatar">Qatar</option>
+            <option value="bahrain">Bahrain</option>
+        </select><br><br>
+      <label for="user-type">I am a:</label> 
+    <input type="radio" id="job-seeker" name="user-type" value="Job Seeker">
+    <label for="job-seeker">Job Seeker</label>
+    <input type="radio" id="employer" name="user-type" value="Employer">
+    <label for="employer">Employer</label><br><br>
+    <input type="submit" value="Sign Up">
+    <p>Already have an account? <a href="login.html">Login</a></p>
+    </form>
+    </div>
 
 </body>
-
 </html>

@@ -1,20 +1,80 @@
+<!DOCTYPE html>
 <html>
+<head>
+    <title>Add New Job</title>
+</head>
 
 <body>
 
-<nav>
+    <nav>
 
-<a href="../index.html">Home</a>
+        <a href="../index.html">Home</a>
 
-<a href="admin_dashboard.html">Dashboard</a>
+        <a href="admin_dashboard.html">Dashboard</a>
 
-<a href="add_job.html">Add Job</a>
+        <a href="add_job.html">Add Job</a>
 
-<a href="admin_jobs_list.html">Jobs List</a>
+        <a href="admin_jobs_list.html">Jobs List</a>
 
-<a href="login.html">Logout</a>
+        <a href="login.html">Logout</a>
 
-</nav>
+    </nav>
+
+    <header>
+        <h1>Add New Job</h1>
+    </header>
+    <form>
+        <div>
+            <label for="job-title">Job Title</label>
+            <input id="job-title"
+                   type="text"
+                   name="job_title"
+                   required />
+        </div>
+        <div>
+            <label for="salary">Salary</label>
+            <input id="salary"
+                   type="number"
+                   name="salary"
+                   step="0.01"
+                   required />
+        </div>
+        <div>
+            <label for="company">Company Name</label>
+            <input id="company"
+                   type="text"
+                   name="company_name"
+                   required />
+        </div>
+        <div>
+            <label for="status">Job Status</label>
+            <select id="status" name="status" required>
+                <option value="open">Open</option>
+                <option value="closed">Closed</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="years">Years of Experience</label>
+            <input id="years"
+                   type="number"
+                   name="years_experience"
+                   step="1"
+                   min="0"
+                   required />
+        </div>
+        <div>
+            <label>Description</label>
+            <textarea name="description" rows="5" required></textarea>
+        </div>
+
+        <div>
+            <button type="submit">Add Job</button>
+
+        </div>
+    </form>
+
+
 
 </body>
 

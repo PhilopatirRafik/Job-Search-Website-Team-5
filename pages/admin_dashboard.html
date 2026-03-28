@@ -3,56 +3,79 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../dashboard.css">
+
     <title>Admin Dashboard</title>
 </head>
 
-  <body>
-    <header>
-      <nav>
-        <a href="../index.html">Home</a> |
-        <a href="admin_dashboard.html">Dashboard</a> |
-        <a href="add_job.html">Add Job</a> |
-        <a href="admin_jobs_list.html">Jobs List</a> |
-        <a href="login.html">Logout</a>
-      </nav>
-    </header>
+<body>
 
-    <hr />
+<header>
+  <nav>
+    <a href="../index.html">Home</a> |
+    <a href="admin_dashboard.html">Dashboard</a> |
+    <a href="add_job.html">Add Job</a> |
+    <a href="admin_jobs_list.html">Jobs List</a> |
+    <a href="login.html">Logout</a>
+  </nav>
+</header>
 
-    <main>
-      <h1>Admin Dashboard</h1>
+<hr />
 
-      <p>
-        Welcome to the Company Admin Dashboard. From here you can manage all job
-        opportunities posted by your company.
-      </p>
+<main class="dashboard-container">
+  <h1>Admin Dashboard</h1>
 
-      <section>
-        <h2>Admin Capabilities</h2>
+  <p>
+    Welcome to the Company Admin Dashboard. From here you can manage all job
+    opportunities posted by your company.
+  </p>
 
-        <ul>
-          <li><a href="add_job.html">Create new job opportunities</a></li>
+  <section>
+    <h2>Admin Capabilities : </h2>
 
-          <li><a href="admin_jobs_list.html">Edit job details</a></li>
+    <div class="cards">
 
-          <li><a href="admin_jobs_list.html">Delete job postings</a></li>
+      <div class="card">
+        <h3>Create Jobs</h3>
+        <p>Add new jobs</p>
+        <a href="add_job.html" class="button">Go to Add Job</a>
+      </div>
 
-          <li><a href="edit_job.html">Manage job status (Open / Closed)</a></li>
+      <div class="card">
+        <h3>Edit Jobs</h3>
+        <p>Update job details</p>
+        <a href="edit_job.html" class="button">Go to Edit Job</a>
+      </div>
 
-          <li>
-            <a href="admin_jobs_list.html"
-              >View all jobs created by your company</a
-            >
-          </li>
-        </ul>
-      </section>
-    </main>
+      <div class="card">
+        <h3>Delete Jobs</h3>
+        <p>Remove jobs</p>
+        <a href="admin_jobs_list.html" class="button">Go to Jobs List</a>
+      </div>
 
-    <hr />
+      <div class="card">
+        <h3>Manage Status</h3>
+        <p>Open / Close jobs</p>
+        <a href="admin_jobs_list.html" class="button">Go to Jobs List</a>
+      </div>
 
-    <footer>
-      <p>Job Search Website - Admin Panel</p>
-    </footer>
-  </body>
+      <div class="card">
+        <h3>View jobs details</h3>
+        <p>View all jobs created by your company</p>
+        <a href="admin_jobs_list.html" class="button">Go to Jobs List</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<hr />
+
+<footer>
+  <p>Job Search Website - Admin Panel</p>
+</footer>
+
+</body>
 </html>

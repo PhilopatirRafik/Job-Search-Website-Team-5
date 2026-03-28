@@ -19,6 +19,13 @@ body {
 
 .job-container h2 {
     margin-top: 10px;
+    font-size: 26px;
+    color: navy;
+    text-transform: uppercase;
+    letter-spacing: 1px; 
+    margin-bottom: 15px;
+    border-bottom: 3px solid navy;
+    padding-bottom: 5px;
 }
 
 .job-container h1 {

@@ -23,7 +23,13 @@ body {
 
 .dashboard-container h2 {
     margin-top: 20px;
+    font-size: 28px;
+    color: rgb(41, 83, 221);
+    text-transform: uppercase;
+    letter-spacing: 1px; 
     margin-bottom: 15px;
+    border-bottom: 3px solid royalblue;
+    padding-bottom: 5px;
 }
 
 .cards {
@@ -37,7 +43,7 @@ body {
     color: white;
     padding: 20px;
     border-radius: 10px;
-    width: 220px;
+    width: 180px;
     transition: 0.3s;
     box-shadow: 0 5px 10px gray;
 }

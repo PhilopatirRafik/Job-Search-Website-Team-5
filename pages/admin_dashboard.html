@@ -1,21 +1,80 @@
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../style.css">
+
+    <title>Admin Dashboard</title>
+</head>
 
 <body>
 
-<nav>
+<header>
+  <nav>
+    <a href="../index.html">Home</a> |
+    <a href="admin_dashboard.html">Dashboard</a> |
+    <a href="add_job.html">Add Job</a> |
+    <a href="admin_jobs_list.html">Jobs List</a> |
+    <a href="login.html">Logout</a>
+  </nav>
+</header>
 
-<a href="../index.html">Home</a>
+<hr />
 
-<a href="admin_dashboard.html">Dashboard</a>
+<main class="dashboard-container">
+  <h1>Admin Dashboard</h1>
 
-<a href="add_job.html">Add Job</a>
+  <p>
+    Welcome to the Company Admin Dashboard. From here you can manage all job
+    opportunities posted by your company.
+  </p>
 
-<a href="admin_jobs_list.html">Jobs List</a>
+  <section>
+    <h2>Admin Capabilities : </h2>
 
-<a href="login.html">Logout</a>
+    <div class="cards">
 
-</nav>
+      <div class="card">
+        <h3>Create Jobs</h3>
+        <p>Add new jobs</p>
+        <a href="add_job.html" class="button">Go to Add Job</a>
+      </div>
+
+      <div class="card">
+        <h3>Edit Jobs</h3>
+        <p>Update job details</p>
+        <a href="edit_job.html" class="button">Go to Edit Job</a>
+      </div>
+
+      <div class="card">
+        <h3>Delete Jobs</h3>
+        <p>Remove jobs</p>
+        <a href="admin_jobs_list.html" class="button">Go to Jobs List</a>
+      </div>
+
+      <div class="card">
+        <h3>Manage Status</h3>
+        <p>Open / Close jobs</p>
+        <a href="admin_jobs_list.html" class="button">Go to Jobs List</a>
+      </div>
+
+      <div class="card">
+        <h3>View jobs details</h3>
+        <p>View all jobs created by your company</p>
+        <a href="admin_jobs_list.html" class="button">Go to Jobs List</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<hr />
+
+<footer>
+  <p>Job Search Website - Admin Panel</p>
+</footer>
 
 </body>
-
 </html>

@@ -1,17 +1,30 @@
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../login.css" />
+    <script src="../JS/login.js" defer></script>
+  </head>
 
-<body>
+  <body>
 
-<nav>
+    <form class="form" id="loginForm">
 
-<a href="../index.html">Home</a>
+      <div class="container">
 
-<a href="login.html">Login</a>
+        <h2 class="form-title">Login</h2><br />      
+      
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username" required />
+        <br>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password" required />
+        <br><br>
+        <input type="submit" value="Login"/>
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        </div>
 
-<a href="signup.html">Sign Up</a>
-
-</nav>
-
-</body>
-
+     </form>
+  </body>
 </html>

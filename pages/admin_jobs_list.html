@@ -1,21 +1,115 @@
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../style.css">
+
+    <title>Admin Jobs List</title>
+</head>
 
 <body>
 
-<nav>
+<header>
+  <nav>
+    <a href="../index.html">Home</a> |
+    <a href="admin_dashboard.html">Dashboard</a> |
+    <a href="add_job.html">Add Job</a> |
+    <a href="admin_jobs_list.html">Jobs List</a> |
+    <a href="login.html">Logout</a>
+  </nav>
+</header>
 
-<a href="../index.html">Home</a>
+<hr />
 
-<a href="admin_dashboard.html">Dashboard</a>
+<main class="job-container">
+  <h1>Jobs List</h1>
 
-<a href="add_job.html">Add Job</a>
+  <p>
+    Below is the list of job opportunities created by your company.
+  </p>
 
-<a href="admin_jobs_list.html">Jobs List</a>
+  <section>
+    <h2>Company Jobs : </h2>
 
-<a href="login.html">Logout</a>
+    <table>
+      <tr>
+        <th>Job ID</th>
+        <th>Job Title</th>
+        <th>Salary</th>
+        <th>Company Name</th>
+        <th>Experience</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
 
-</nav>
+      <tr>
+        <td>1</td>
+        <td>Frontend Developer</td>
+        <td>9000</td>
+        <td>Google</td>
+        <td>2</td>
+        <td>Open</td>
+        <td class="actions">
+          <a href="edit_job.html" class="edit">Edit</a>
+          <a href="#" class="delete">Delete</a>
+        </td>
+      </tr>
+
+      <tr>
+        <td>2</td>
+        <td>Backend Developer</td>
+        <td>10000</td>
+        <td>Amazon</td>
+        <td>3</td>
+        <td>Open</td>
+        <td class="actions">
+          <a href="edit_job.html" class="edit">Edit</a>
+          <a href="#" class="delete">Delete</a>
+        </td>
+      </tr>
+
+      <tr>
+        <td>3</td>
+        <td>UI Designer</td>
+        <td>8500</td>
+        <td>Microsoft</td>
+        <td>2</td>
+        <td>Closed</td>
+        <td class="actions">
+          <a href="edit_job.html" class="edit">Edit</a>
+          <a href="#" class="delete">Delete</a>
+        </td>
+      </tr>
+
+      <tr>
+            <td>4</td>
+            <td>Data Analyst</td>
+            <td>9500</td>
+            <td>Meta</td>
+            <td>1</td>
+            <td>Open</td>
+            <td class="actions">
+              <a href="edit_job.html" class="edit">Edit</a>
+              <a href="#" class="delete">Delete</a>
+            </td>
+          </tr>
+
+    </table>
+  </section>
+
+  <br>
+
+  <a href="add_job.html">Add New Job</a>
+
+</main>
+
+<hr />
+
+<footer>
+  <p>Job Search Website - Admin Jobs Management</p>
+</footer>
 
 </body>
-
 </html>

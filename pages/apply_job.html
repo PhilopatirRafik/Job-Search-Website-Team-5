@@ -1,84 +1,89 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-<title>Apply for Job</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apply for Job</title>
+
+    <!-- Main Style -->
+    <link rel="stylesheet" href="../style.css">
+    <!-- Page Custom Style -->
+    <link rel="stylesheet" href="../apply.css">
 </head>
 
 <body>
 
-<nav>
+    <!-- NAVBAR -->
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="search_jobs.html">Search Jobs</a>
+        <a href="user_applied_jobs.html">Applied Jobs</a>
+        <a href="login.html">Logout</a>
+    </nav>
 
-<a href="../index.html">Home</a>
+    <!-- FORM CONTAINER -->
+    <div class="admin-form-container">
 
-<a href="search_jobs.html">Search Jobs</a>
+        <h1>Apply for Job</h1>
 
-<a href="user_applied_jobs.html">Applied Jobs</a>
+        <form id="applyForm">
 
-<a href="login.html">Logout</a>
+            <div>
+                <label>Select Job:</label>
+                <select id="jobSelect" required>
+                    <option value="">Choose a Job</option>
+                </select>
+            </div>
 
-</nav>
+            <div>
+                <label>Full Name:</label>
+                <input type="text" id="fullname" placeholder="Enter your full name" required />
+                <span class="error-message" id="nameError"></span>
+            </div>
 
-<h1>Apply for Job</h1>
+            <div>
+                <label>Email:</label>
+                <input type="email" id="email" placeholder="Enter your email" required />
+                <span class="error-message" id="emailError"></span>
+            </div>
 
-<form action="user_applied_jobs.html">
+            <div>
+                <label>Phone Number:</label>
+                <input type="tel" id="phone" placeholder="Enter your phone number" />
+            </div>
 
-<label>Select Job:</label><br>
+            <div>
+                <label>Years of Experience:</label>
+                <input type="number" id="experience" placeholder="Enter years of experience" min="0" />
+            </div>
 
-<select name="job" required>
+            <div>
+                <label>Upload CV Link:</label>
+                <input type="url" id="cv" placeholder="Enter your CV link" />
+            </div>
 
-<option value="">Choose a Job</option>
+            <div>
+                <label>Cover Letter:</label>
+                <textarea id="cover_letter" rows="4" placeholder="Enter your cover letter"></textarea>
+            </div>
 
-<option>Frontend Developer - Google</option>
+            <div class="button-group">
+                <button type="submit">Apply</button>
+                <button type="reset" class="btn-reset">Reset</button>
+            </div>
 
-<option>Backend Developer - Amazon</option>
+            <div class="success-message" id="successMsg">
+                Application submitted successfully!
+            </div>
 
-<option>UI Designer - Microsoft</option>
+        </form>
 
-<option>Data Analyst - Meta</option>
+        <a href="search_jobs.html">← Back to Jobs</a>
 
-</select>
+    </div>
 
-<br><br>
-
-<label>Full Name:</label><br>
-<input type="text" name="fullname" required>
-
-<br><br>
-
-<label>Email:</label><br>
-<input type="email" name="email" required>
-
-<br><br>
-
-<label>Phone Number:</label><br>
-<input type="tel" name="phone">
-
-<br><br>
-
-<label>Years of Experience:</label><br>
-<input type="number" name="experience">
-
-<br><br>
-
-<label>Upload CV Link:</label><br>
-<input type="url" name="cv">
-
-<br><br>
-
-<label>Cover Letter:</label><br>
-<textarea name="cover_letter" rows="4" cols="40"></textarea>
-
-<br><br>
-
-<button type="submit">Apply</button>
-
-</form>
-
-<br>
-
-<a href="search_jobs.html">Back to Jobs</a>
+    <!-- JS -->
+    <script src="../JS/apply.js"></script>
 
 </body>
-
 </html>

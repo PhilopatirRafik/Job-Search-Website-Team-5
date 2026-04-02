@@ -7,18 +7,18 @@
 
 /* ===== BODY ===== */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8fafc;
-    color: #111827;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ddd;
+    color: #333;
     padding: 20px;
 }
 
 /* ===== NAVBAR ===== */
 nav {
-    background-color: #1e3a8a;
+    background-color: #468970;
     padding: 15px;
     margin-bottom: 30px;
-    border-radius: 6px;
+    border-radius: 12px;
 }
 
     nav a {
@@ -37,30 +37,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Dashboard & Job List Headings */
-.dashboard-container h2,
-.job-container h2 {
-    font-size: 28px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-    border-bottom: 3px solid royalblue;
-}
-
-/* Specific colors for each page of (Dashboard & Job List) */
-.dashboard-container h2 {
-    color: rgb(41, 83, 221);
-    margin-top: 20px;
-}
-
-.job-container h2 {
-    color: navy;
-    border-bottom: 3px solid navy;
-    margin-top: 10px;
-    font-size: 26px;
-}
-
 /* ===== CONTAINERS ===== */
 .dashboard-container {
     padding: 30px;
@@ -70,19 +46,18 @@ h1 {
     padding: 20px;
 }
 
-    /* Paragraphs */
     .dashboard-container p,
     .job-container p {
-        background-color: whitesmoke;
+        background-color: #f4f0eb;
         padding: 15px;
-        border-radius: 10px;
-        color: rgb(24, 7, 175);
+        border-radius: 12px;
+        color: #333;
         font-size: 15px;
         box-shadow: 0 2px 5px gray;
         margin-bottom: 25px;
     }
 
-/* ===== CARDS (Dashboard) ===== */
+/* ===== CARDS ===== */
 .cards {
     display: flex;
     gap: 20px;
@@ -90,45 +65,44 @@ h1 {
 }
 
 .card {
-    background-color: rgb(41, 83, 221);
+    background-color: #468970;
     color: white;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
     width: 180px;
     transition: 0.3s;
     box-shadow: 0 5px 10px gray;
 }
 
     .card:hover {
-        background-color: blue;
+        background-color: #356d59;
         transform: scale(1.05);
     }
 
     .card a.button {
-        background-color: black;
-        color: rgb(41, 83, 221);
+        background-color: white;
+        color: #468970;
         text-decoration: none;
         padding: 8px 12px;
-        border-radius: 5px;
+        border-radius: 20px;
         display: inline-block;
         transition: 0.3s;
     }
 
         .card a.button:hover {
-            background-color: rgb(200, 200, 255);
-            color: rgb(0, 0, 128);
+            background-color: #ddd;
         }
 
 /* ===== FORM ===== */
 form {
     background-color: white;
     padding: 20px;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    border: none;
     max-width: 500px;
 }
 
-    /* form spacing */
+    /* spacing */
     form div {
         margin-bottom: 15px;
     }
@@ -145,23 +119,33 @@ input,
 select,
 textarea {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #d1d5db;
-    border-radius: 5px;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(244, 240, 235);
 }
 
-/* button */
+    input:focus,
+    select:focus,
+    textarea:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+/* buttons */
 button {
-    background-color: #3b82f6;
+    background-color: #468970;
     color: white;
-    padding: 10px 15px;
+    padding: 12px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
 }
 
     button:hover {
-        background-color: #1e3a8a;
+        opacity: 1;
     }
 
 /* ===== TABLE ===== */
@@ -171,135 +155,93 @@ table {
     background-color: white;
     box-shadow: 0 5px 10px gray;
     margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 th,
 td {
-    border: 1px solid #d1d5db;
     padding: 10px;
 }
 
 th {
-    background-color: #3b82f6;
+    background-color: #468970;
     color: white;
 }
 
 tr:hover {
-    background-color: rgb(200, 200, 200);
+    background-color: #eee;
 }
 
-/* Action Buttons in Table in Job List page */
+/* actions */
 .actions a {
     padding: 5px 10px;
-    border-radius: 5px;
+    border-radius: 20px;
     text-decoration: none;
     color: white;
     font-weight: bold;
 }
 
 .actions .edit {
-    background-color: green;
+    background-color: #468970;
 }
 
 .actions .delete {
     background-color: crimson;
 }
 
-/* Add Job Link in Job List page */
-.job-container a {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: navy;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-    .job-container a:hover {
-        background-color: royalblue;
-        transform: scale(1.05);
-    }
-
-/* ===== FOOTER ===== */
-footer {
-    background-color: navy;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: 40px;
-    font-size: 14px;
-    border-top: 3px solid royalblue;
-}
-
-/* ===== ADDITIONS FROM SECOND FILE (Admin Form, Buttons, etc.) ===== */
-
-/* Admin Form Container */
+/* ===== ADMIN FORM ===== */
 .admin-form-container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
 }
 
-    .admin-form-container input:hover,
-    .admin-form-container select:hover,
-    .admin-form-container textarea:hover {
-        border-color: #60a5fa;
-    }
-
-    .admin-form-container input:focus,
-    .admin-form-container select:focus,
-    .admin-form-container textarea:focus {
-        border-color: #1e3a8a;
-        box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
-        outline: none;
-    }
-
-/* Error & Success Messages */
+/* messages */
 .error-message {
-    color: #dc2626;
+    color: crimson;
     font-size: 12px;
     margin-top: 5px;
-    display: block;
 }
 
 .success-message {
     background-color: #d4edda;
     color: #155724;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 20px;
     display: none;
 }
 
-/* Button Variants */
-.btn-reset {
-    background-color: #6c757d;
-}
-
-    .btn-reset:hover {
-        background-color: #5a6268;
-    }
-
-.btn-delete {
-    background-color: #dc3545;
-}
-
-    .btn-delete:hover {
-        background-color: #c82333;
-    }
-
+/* buttons group */
 .button-group {
     display: flex;
     gap: 10px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+.btn-reset {
+    background-color: #999;
+}
+
+.btn-delete {
+    background-color: crimson;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background-color: #468970;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    border-radius: 10px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) 
+{
     .admin-form-container {
         width: 95%;
-        padding: 10px;
     }
 
     .button-group {

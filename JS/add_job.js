@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (isValid) {
             const newJob = {
-                id: 'job_' + Date.now(),
+                id: 'job_' + Date.now().toString().slice(-6),
                 title: title,
                 salary: parseFloat(salary),
                 company: company,

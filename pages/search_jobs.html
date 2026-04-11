@@ -1,43 +1,33 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8">
     <title>Search Jobs</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
-  <body>
+<body>
+
+<header>
     <nav>
-      <a href="../index.html">Home</a>
-
-      <a href="search_jobs.html">Search Jobs</a>
-
-      <a href="user_applied_jobs.html">Applied Jobs</a>
-
-      <a href="login.html">Logout</a>
+        <a href="../index.html">Home</a>
+        <a href="search_jobs.html">Search Jobs</a>
+        <a href="user_applied_jobs.html">Applied Jobs</a>
+        <a href="login.html">Logout</a>
     </nav>
-    <header>
-      <br />
-      <h1>Search Jops</h1>
-    </header>
-    <section>
-      <form action=" jop_results.html" method="get">
-        <div>
-          <label for="jop_title"> Jop title </label>
-          <br />
-          <input type="text" name="jop_title" id="jop_title" />
-        </div>
-        <br />
-        <div>
-          <label for="experience_years"> Years of Experience </label>
-          <br />
-          <input type="" name="experience_years" id="experience_years" />
-        </div>
-        <br />
-        <div>
-          <input type="submit" value="Search" name="search" id="search" />
-        </div>
-      </form>
-    </section>
-  </body>
+
+    <h1 class="page-title">Search Jobs</h1>
+</header>
+
+<section class="search-container">
+    <form id="searchForm">
+        <input type="text" id="job_title" placeholder="Job Title">
+        <input type="number" id="experience_years" placeholder="Years of Experience">
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+<script src="../JS/search_jobs.js"></script>
+
+</body>
 </html>

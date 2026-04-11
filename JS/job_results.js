@@ -12,7 +12,6 @@ window.onload = function () {
     let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
     const tableBody = document.getElementById("tableBody");
 
-    // فلترة + شرط إن الوظيفة تكون open
     let filteredJobs = jobs.filter(job =>
         job.status === "open" &&
         job.title.toLowerCase().includes(titleParam) &&

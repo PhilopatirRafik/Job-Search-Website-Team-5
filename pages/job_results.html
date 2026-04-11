@@ -1,67 +1,41 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8">
     <title>Job Results</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
-  <body>
+<body>
+
+<header>
     <nav>
-      <a href="../index.html">Home</a>
-
-      <a href="search_jobs.html">Search Jobs</a>
-
-      <a href="user_applied_jobs.html">Applied Jobs</a>
-
-      <a href="login.html">Logout</a>
+        <a href="../index.html">Home</a>
+        <a href="search_jobs.html">Search Jobs</a>
+        <a href="user_applied_jobs.html">Applied Jobs</a>
+        <a href="login.html">Logout</a>
     </nav>
-    <header>
-      <h1>Available Jops</h1>
-    </header>
-    <section>
-      <table border="1">
-        <tr>
-          <th>Jop Title</th>
-          <th>Company Name</th>
-          <th>Experience Years</th>
-          <th>Salary</th>
-          <th>Status</th>
-          <th>Details</th>
-        </tr>
-        <tr>
-          <td>Frontend Developer</td>
-          <td>Google</td>
-          <td>3+ years</td>
-          <td>$3000 - $4000</td>
-          <td>Open</td>
-          <td><a href="jop_details.html"> View Details </a></td>
-        </tr>
-        <tr>
-          <td>Backend Developer</td>
-          <td>Amazon</td>
-          <td>5+ years</td>
-          <td>$4000 - $5000</td>
-          <td>Open</td>
-          <td><a href="jop_details.html"> View Details </a></td>
-        </tr>
-        <tr>
-          <td>UI Designer</td>
-          <td>Microsoft</td>
-          <td>4+ years</td>
-          <td>$3500 - $4500</td>
-          <td>Open</td>
-          <td><a href="jop_details.html"> View Details </a></td>
-        </tr>
-        <tr>
-          <td>Data Analyst</td>
-          <td>Meta</td>
-          <td>2+ years</td>
-          <td>$4500 - $5500</td>
-          <td>Open</td>
-          <td><a href="jop_details.html"> View Details </a></td>
-        </tr>
-      </table>
-    </section>
-  </body>
+
+    <h1 class="page-title">Available Jobs</h1>
+</header>
+
+<section class="job-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Company</th>
+                <th>Years</th>
+                <th>Salary</th>
+                <th>Status</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</section>
+
+<script src="../JS/job_results.js"></script>
+
+</body>
 </html>

@@ -11,11 +11,13 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   );
 
   if (user) {
-    // save current user
     localStorage.setItem("currentUser", JSON.stringify(user));
 
-    // redirect
-    window.location.href = "../index.html";
+    if (user.userType === "Employer") {
+        window.location.href = "admin_dashboard.html";
+    } else {
+        window.location.href = "search_jobs.html";
+    }
   } else {
     alert("Invalid username or password");
   }

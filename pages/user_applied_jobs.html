@@ -14,10 +14,10 @@
   <body>
     <!-- NAVBAR -->
     <nav>
-      <a href="../index.html">Home</a>
+      <a href="search_jobs.html">Home</a>
       <a href="search_jobs.html">Search Jobs</a>
       <a href="user_applied_jobs.html">Applied Jobs</a>
-      <a href="login.html">Logout</a>
+      <a href="../index.html" onclick="localStorage.removeItem('currentUser')">Logout</a>
     </nav>
 
     <div class="job-container">
@@ -35,7 +35,6 @@
         </thead>
 
         <tbody id="tableBody">
-          <!-- JS هيحط البيانات هنا -->
         </tbody>
       </table>
 

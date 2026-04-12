@@ -1,19 +1,16 @@
-// تحميل البيانات
 window.onload = function () {
   let applications = JSON.parse(localStorage.getItem("applications")) || [];
   let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
 
   let tableBody = document.getElementById("tableBody");
 
-  // لو مفيش بيانات
   if (applications.length === 0) {
     tableBody.innerHTML = "<tr><td colspan='5'>No applications found</td></tr>";
     return;
   }
 
   applications.forEach((app, index) => {
-    let job = jobs[app.jobIndex];
-
+    let job = jobs.find(j => j.id === app.jobId);
     let row = `
       <tr>
         <td>${job ? job.title + " - " + job.company : "Unknown Job"}</td>
@@ -30,7 +27,6 @@ window.onload = function () {
   });
 };
 
-// حذف application
 function deleteApplication(index) {
   let applications = JSON.parse(localStorage.getItem("applications")) || [];
 

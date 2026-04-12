@@ -15,10 +15,10 @@
 
     <!-- NAVBAR -->
     <nav>
-        <a href="../index.html">Home</a>
+        <a href="search_jobs.html">Home</a>
         <a href="search_jobs.html">Search Jobs</a>
         <a href="user_applied_jobs.html">Applied Jobs</a>
-        <a href="login.html">Logout</a>
+        <a href="../index.html" onclick="localStorage.removeItem('currentUser')">Logout</a>
     </nav>
 
     <!-- FORM CONTAINER -->
@@ -29,10 +29,8 @@
         <form id="applyForm">
 
             <div>
-                <label>Select Job:</label>
-                <select id="jobSelect" required>
-                    <option value="">Choose a Job</option>
-                </select>
+                <label>Selected Job:</label>
+                <input type="text" id="jobSelect" readonly style="background-color: #eee; cursor: not-allowed;" />
             </div>
 
             <div>
@@ -69,7 +67,7 @@
 
             <div class="button-group">
                 <button type="submit">Apply</button>
-                <button type="reset" class="btn-reset">Reset</button>
+                <button type="button" class="btn-reset" onclick="resetForm()">Reset</button>
             </div>
 
             <div class="success-message" id="successMsg">

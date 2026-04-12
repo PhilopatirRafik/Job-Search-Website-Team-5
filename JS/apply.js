@@ -1,9 +1,20 @@
 // ================= LOAD JOBS =================
+const urlParams = new URLSearchParams(window.location.search);
+const preSelectedId = urlParams.get('id');
+
+function resetForm() {
+  let jobValue = document.getElementById("jobSelect").value;
+  document.getElementById("applyForm").reset();
+  document.getElementById("jobSelect").value = jobValue;
+  }
+  
 window.onload = function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const preSelectedId = urlParams.get('id');  
   let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
+  let applications = JSON.parse(localStorage.getItem("applications")) || [];
   let select = document.getElementById("jobSelect");
 
-  // لو مفيش jobs
   if (jobs.length === 0) {
     let option = document.createElement("option");
     option.textContent = "No jobs available";
@@ -12,10 +23,29 @@ window.onload = function () {
     return;
   }
 
+    let job = jobs.find(j => j.id === preSelectedId);
+    if (job) {
+    select.value = job.title + " - " + job.company;
+    } else {
+    select.value = "No job selected";
+    }
   jobs.forEach((job, index) => {
     let option = document.createElement("option");
-    option.value = index;
-    option.textContent = job.title + " - " + job.company;
+    option.value = job.id;
+    let isApplied = applications.some(app => String(app.jobIndex) === String(index));
+    
+    let isClosed = (job.status === "Closed" || job.status === "closed");
+
+    if (isApplied) {
+        option.textContent = job.title + " - " + job.company + " (Already Applied)";
+        option.disabled = true;
+    } else if (isClosed) {
+        option.textContent = job.title + " - " + job.company + " (Closed)";
+        option.disabled = true;
+    } else {
+        option.textContent = job.title + " - " + job.company;
+    }
+
     select.appendChild(option);
   });
 };
@@ -25,7 +55,7 @@ document.getElementById("applyForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
   // values
-  let jobIndex = document.getElementById("jobSelect").value;
+  let jobId = preSelectedId;
   let fullname = document.getElementById("fullname").value.trim();
   let email = document.getElementById("email").value.trim();
   let phone = document.getElementById("phone").value.trim();
@@ -43,7 +73,7 @@ document.getElementById("applyForm").addEventListener("submit", function (e) {
 
   // ================= VALIDATION =================
 
-  if (jobIndex === "") {
+  if (!jobId) {
     alert("Please select a job!");
     return;
   }
@@ -69,7 +99,7 @@ document.getElementById("applyForm").addEventListener("submit", function (e) {
   let applications = JSON.parse(localStorage.getItem("applications")) || [];
 
   applications.push({
-    jobIndex: jobIndex,
+    jobId: jobId,
     fullname: fullname,
     email: email,
     phone: phone,

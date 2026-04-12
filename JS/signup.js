@@ -5,17 +5,16 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
   let confirmPassword = document.getElementById("confirm-password").value;
+  
+  let userType = document.querySelector('input[name="user-type"]:checked').value;
 
-  // validation
   if (password !== confirmPassword) {
     alert("No passwords matching");
     return;
   }
 
-  // get existing users
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
-  // check if user exists
   let userExists = users.find((user) => user.email === email);
 
   if (userExists) {
@@ -23,11 +22,10 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
     return;
   }
 
-  // save user
-  users.push({ username, email, password });
+  users.push({ username, email, password, userType });
 
   localStorage.setItem("users", JSON.stringify(users));
 
-  // redirect to login
-  window.location.href = "../index.html";
+  alert("Account Created! Please Login.");
+  window.location.href = "login.html";
 });

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -5,63 +6,72 @@
     <link rel="stylesheet" href="../style.css">
     <title>Job Results</title>
 </head>
-
-  <body>
+<body>
     <nav>
-      <a href="../index.html">Home</a>
-
+      <a href="search_jobs.html">Home</a>
       <a href="search_jobs.html">Search Jobs</a>
-
       <a href="user_applied_jobs.html">Applied Jobs</a>
-
-      <a href="login.html">Logout</a>
+      <a href="../index.html" onclick="localStorage.removeItem('currentUser')">Logout</a>
     </nav>
     <header>
-      <h1>Available Jops</h1>
+      <h1>Available Jobs</h1>
     </header>
-    <section>
-      <table border="1">
-        <tr>
-          <th>Jop Title</th>
-          <th>Company Name</th>
-          <th>Experience Years</th>
-          <th>Salary</th>
-          <th>Status</th>
-          <th>Details</th>
-        </tr>
-        <tr>
-          <td>Frontend Developer</td>
-          <td>Google</td>
-          <td>3+ years</td>
-          <td>$3000 - $4000</td>
-          <td>Open</td>
-          <td><a href="jop_details.html"> View Details </a></td>
-        </tr>
-        <tr>
-          <td>Backend Developer</td>
-          <td>Amazon</td>
-          <td>5+ years</td>
-          <td>$4000 - $5000</td>
-          <td>Open</td>
-          <td><a href="jop_details.html"> View Details </a></td>
-        </tr>
-        <tr>
-          <td>UI Designer</td>
-          <td>Microsoft</td>
-          <td>4+ years</td>
-          <td>$3500 - $4500</td>
-          <td>Open</td>
-          <td><a href="jop_details.html"> View Details </a></td>
-        </tr>
-        <tr>
-          <td>Data Analyst</td>
-          <td>Meta</td>
-          <td>2+ years</td>
-          <td>$4500 - $5500</td>
-          <td>Open</td>
-          <td><a href="jop_details.html"> View Details </a></td>
-        </tr>
+    <section class="job-container">
+      <table border="1" id="resultsTable">
+        <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Company Name</th>
+              <th>Experience</th>
+              <th>Salary</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="jobsList">
+            </tbody>
       </table>
     </section>
-  </body>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
+    let applications = JSON.parse(localStorage.getItem("applications")) || []; 
+    
+    let tableBody = document.getElementById("jobsList");
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterTitle = urlParams.get('title');
+    const filterExp = urlParams.get('exp');
+
+    let filteredJobs = jobs;
+
+    if (filterTitle && filterTitle.trim() !== "") {
+        filteredJobs = filteredJobs.filter(j => j.title.toLowerCase().includes(filterTitle.toLowerCase()));
+    }
+    if (filterExp && filterExp.trim() !== "") {
+        filteredJobs = filteredJobs.filter(j => parseInt(j.years) <= parseInt(filterExp));
+    }
+
+    if (filteredJobs.length === 0) {
+        tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>No jobs found.</td></tr>";
+    } else {
+        tableBody.innerHTML = "";
+        filteredJobs.forEach(job => {
+            const isApplied = applications.some(app => app.jobId == job.id);
+            
+            let row = `<tr>
+                <td>${job.title} ${isApplied ? '<b style="color:green; margin-left:5px;">(Applied)</b>' : ''}</td>
+                <td>${job.company}</td>
+                <td>${job.years} Years</td>
+                <td>$${job.salary}</td>
+                <td>${job.status}</td>
+                <td><a href="job_details.html?id=${job.id}" class="button" style="padding: 5px 10px; font-size: 12px;">View</a></td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+      }
+  });
+  </script>
+</body>
 </html>

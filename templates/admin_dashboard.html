@@ -1,0 +1,72 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <a href="{% url 'admin_dashboard' %}">Home</a> |
+    <a href="{% url 'admin_dashboard' %}">Dashboard</a> |
+    <a href="{% url 'add_job' %}">Add Job</a> |
+    <a href="{% url 'admin_jobs_list' %}">Jobs List</a> |
+    <a href="{% url 'login' %}" onclick="localStorage.removeItem('currentUser')">Logout</a>  </nav>
+</header>
+
+<hr />
+
+<main class="dashboard-container">
+  <h1>Admin Dashboard</h1>
+
+  <p>
+    Welcome to the Company Admin Dashboard. From here you can manage all job
+    opportunities posted by your company.
+  </p>
+
+  <section>
+    <h2>Admin Capabilities : </h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>Create Jobs</h3>
+        <p>Add new jobs</p>
+        <a href="{% url 'add_job' %}" class="button">Go to Add Job</a>
+      </div>
+      <div class="card">
+        <h3>Edit Jobs</h3>
+        <p>Update job details</p>
+        <a href="{% url 'admin_jobs_list' %}" class="button">Go to Jobs List</a>
+      </div>
+      <div class="card">
+        <h3>Delete Jobs</h3>
+        <p>Remove jobs</p>
+        <a href="{% url 'admin_jobs_list' %}" class="button">Go to Jobs List</a>
+      </div>
+      <div class="card">
+        <h3>View jobs details</h3>
+        <p>View all jobs</p>
+        <a href="{% url 'admin_jobs_list' %}" class="button">Go to Jobs List</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<hr />
+
+<footer>
+  <p>Job Search Website - Admin Panel</p>
+</footer>
+
+<script src="{% static 'JS/admin_dashboard.js' %}"></script>
+</body>
+</html>

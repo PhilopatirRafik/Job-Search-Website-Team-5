@@ -1,0 +1,49 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Applied Jobs</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/apply.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <a href="{% url 'search_jobs' %}">Home</a>
+      <a href="{% url 'search_jobs' %}">Search Jobs</a>
+      <a href="{% url 'user_applied_jobs' %}">Applied Jobs</a>
+      <a href="{% url 'login' %}" onclick="localStorage.removeItem('currentUser')">Logout</a>
+    </nav>
+
+    <div class="job-container">
+      <h2>My Applied Jobs</h2>
+
+      <table id="appliedTable">
+        <thead>
+          <tr>
+            <th>Job</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Experience</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="tableBody">
+        </tbody>
+      </table>
+
+      <br />
+      <a href="{% url 'search_jobs' %}">← Back to Jobs</a>
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'js/applyed.js' %}"></script>
+  </body>
+</html>

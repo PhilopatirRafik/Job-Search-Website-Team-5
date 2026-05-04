@@ -41,57 +41,47 @@ h1 {
 .dashboard-container {
     padding: 30px;
 }
-
 .job-container {
     padding: 20px;
 }
-
-    .dashboard-container p,
-    .job-container p {
-        background-color: #f4f0eb;
-        padding: 15px;
-        border-radius: 12px;
-        color: #333;
-        font-size: 15px;
-        box-shadow: 0 2px 5px gray;
-        margin-bottom: 25px;
-    }
-
 /* ===== CARDS ===== */
 .cards {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     gap: 20px;
-    flex-wrap: wrap;
 }
 
 .card {
     background-color: #468970;
     color: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 15px;
-    width: 180px;
-    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     box-shadow: 0 5px 10px gray;
+    transition: 0.3s;
 }
 
-    .card:hover {
-        background-color: #356d59;
-        transform: scale(1.05);
-    }
+.card:hover {
+    background-color: #356d59;
+    transform: translateY(-5px);
+}
 
-    .card a.button {
-        background-color: white;
-        color: #468970;
-        text-decoration: none;
-        padding: 8px 12px;
-        border-radius: 20px;
-        display: inline-block;
-        transition: 0.3s;
-    }
+.card a.button {
+    background-color: white;
+    color: #468970;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: inline-block;
+    transition: 0.3s;
+    width: fit-content;
+}
 
-        .card a.button:hover {
-            background-color: #ddd;
-        }
+.card a.button:hover {
+    background-color: #ddd;
+}
 
 /* ===== FORM ===== */
 form {

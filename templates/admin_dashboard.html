@@ -37,26 +37,15 @@
     <div class="cards">
 
       <div class="card">
-        <h3>Create Jobs</h3>
-        <p>Add new jobs</p>
-        <a href="{% url 'add_job' %}" class="button">Go to Add Job</a>
-      </div>
-      <div class="card">
-        <h3>Edit Jobs</h3>
-        <p>Update job details</p>
-        <a href="{% url 'admin_jobs_list' %}" class="button">Go to Jobs List</a>
-      </div>
-      <div class="card">
-        <h3>Delete Jobs</h3>
-        <p>Remove jobs</p>
-        <a href="{% url 'admin_jobs_list' %}" class="button">Go to Jobs List</a>
-      </div>
-      <div class="card">
-        <h3>View jobs details</h3>
-        <p>View all jobs</p>
-        <a href="{% url 'admin_jobs_list' %}" class="button">Go to Jobs List</a>
+        <h3>Create Jobs : </h3>
+        <a href="{% url 'add_job' %}" class="button">Add New Job</a>
       </div>
 
+      <div class="card">
+        <h3>Manage Jobs : </h3>
+        <a href="{% url 'admin_jobs_list' %}" class="button">View all jobs, Edit job details and Delete jobs</a>
+      </div>
+        
     </div>
   </section>
 </main>

@@ -1,39 +1,69 @@
-{% load static %}
 <!doctype html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+NZ+Basic:wght@200&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+NZ+Basic:wght@200&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="{% static 'css/login.css' %}" />
-    <script src="{% static 'js/signup.js' %}" defer></script>
+    <!-- <script src="{% static 'js/signup.js' %}" defer></script> -->
   </head>
   <body>
-    <a href="{% url 'home' %}" class="button" style="text-decoration: none; display: inline-block; width: auto; padding: 8px 15px; margin-bottom: 20px; background-color: #468970; color: white; border-radius: 20px; font-size: 14px;">
-   ← Back to Home
+    <a
+      href="{% url 'home' %}"
+      class="button"
+      style="
+        text-decoration: none;
+        display: inline-block;
+        width: auto;
+        padding: 8px 15px;
+        margin-bottom: 20px;
+        background-color: #468970;
+        color: white;
+        border-radius: 20px;
+        font-size: 14px;
+      "
+    >
+      ← Back to Home
     </a>
-    <form class="form" id="loginForm" action="/signup/" method="POST">
+    {% if error %}
+    <p style="color: red; text-align: center">{{ error }}</p>
+    {% endif %}
+    <form
+      class="form"
+      id="signupForm"
+      action="{% url 'signup' %}"
+      method="POST"
+    >
       {% csrf_token %}
 
       <div class="container">
-      <h2 class="form-title">Sign Up</h2><br />
-    
+        <h2 class="form-title">Sign Up</h2>
+        <br />
 
         <!-- ضفنا الـ name هنا عشان جانجو يشوفها -->
         <label for="username">Username</label><br />
         <input type="text" id="username" name="username" required /><br />
-        
+
         <label for="email">Email</label><br />
         <input type="email" id="email" name="email" required /><br />
-        
+
         <label for="password">Password</label><br />
         <input type="password" id="password" name="password" required /><br />
-        
+
         <label for="confirm-password">Confirm Password</label><br />
-        <input type="password" id="confirm-password" name="confirm_password" required /><br />
+        <input
+          type="password"
+          id="confirm-password"
+          name="confirm_password"
+          required
+        /><br />
 
         <!--gender -->
         <label for="gender">Gender</label><br />
@@ -47,15 +77,27 @@
         <!--user type -->
         <label for="user-type">I am a:</label>
         <div class="options">
-          <input type="radio" id="job-seeker" name="user-type" value="Job Seeker" required />
+          <input
+            type="radio"
+            id="job-seeker"
+            name="user-type"
+            value="Job Seeker"
+            required
+          />
           <label for="job-seeker">Job Seeker</label>
-          <input type="radio" id="employer" name="user-type" value="Employer" required />
+          <input
+            type="radio"
+            id="employer"
+            name="user-type"
+            value="Employer"
+            required
+          />
           <label for="employer">Employer</label><br /><br />
         </div>
 
         <input type="submit" value="Sign Up" />
         <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
       </div>
-      </form>
+    </form>
   </body>
 </html>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% load static %}
 <html lang="en">
   <head>
@@ -12,7 +13,10 @@
     <a href="{% url 'home' %}" class="button" style="text-decoration: none; display: inline-block; width: auto; padding: 8px 15px; margin-bottom: 20px; background-color: #468970; color: white; border-radius: 20px; font-size: 14px;">
    ← Back to Home
     </a>
-      <form class="form" id="loginForm" action="/login/" method="POST">
+    {% if error %}
+  <p style="color: red; text-align: center;">{{ error }}</p>
+{% endif %}
+      <form class="form" id="loginForm" action="{% url 'login' %}" method="POST">
         {% csrf_token %}
 
       <div class="container">

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User 
-
+from django.db import IntegrityError
 def home(request):
     return render(request, 'index.html')
 
@@ -39,18 +39,27 @@ def user_applied_jobs(request):
 def signup(request):
     if request.method == 'POST':
         u_name = request.POST.get('username')
+        u_email = request.POST.get('email')
         p_pass = request.POST.get('password')
+        confirm_p = request.POST.get('confirm_password')
         u_type = request.POST.get('user-type')
         
-        if u_name and p_pass:
-            user = User.objects.create_user(username=u_name, password=p_pass)
-            
-            if u_type == 'Employer':
-                user.is_staff = True
-                user.save()
-                
-            return redirect('login') 
-            
+        if u_name and u_email and p_pass and confirm_p:
+            if p_pass == confirm_p:
+                try:
+                    user = User.objects.create_user(username=u_name, email=u_email, password=p_pass)
+                except IntegrityError:
+                    return render(request, 'signup.html', {'error': 'Username or email already exists'})
+
+                if u_type == 'Employer':
+                    user.is_staff = True
+                    user.save()
+                return redirect('login')
+            else:
+                return render(request, 'signup.html', {'error': 'Passwords do not match'})
+        else:
+            return render(request, 'signup.html', {'error': 'Please fill in all fields'})
+                         
     return render(request, 'signup.html')
 
 

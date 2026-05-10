@@ -4,7 +4,10 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin-db/', views.admin_dashboard, name='admin_dashboard'),
+    path('api/dashboard/', views.dashboard_stats),
     path('admin-jobs/', views.admin_jobs_list, name='admin_jobs_list'),
+    path('api/jobs/', views.get_jobs, name='get_jobs'),
+    path('api/jobs/<int:job_id>/', views.delete_job, name='delete_job'),
     path('add-job/', views.add_job, name='add_job'),
     path('edit-job/', views.edit_job, name='edit_job'),
     path('search/', views.search_jobs, name='search_jobs'),

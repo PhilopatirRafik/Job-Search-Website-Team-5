@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User 
 from django.db import IntegrityError
+from django.http import JsonResponse
 def home(request):
     return render(request, 'index.html')
 
@@ -80,3 +81,35 @@ def login_view(request):
             return render(request, 'login.html', {'error': 'Invalid Username or Password'})
             
     return render(request, 'login.html')
+
+    # Dashboard API (for add job persone replace Job variable with the actual variable name)
+def dashboard_stats(request):
+    jobs = Job.objects.all()
+
+    total = jobs.count()
+    open_jobs = jobs.filter(status='open').count()
+    closed_jobs = jobs.filter(status='closed').count()
+
+    return JsonResponse({
+        "total": total,
+        "open": open_jobs,
+        "closed": closed_jobs
+    })
+
+# Job list API (for add job replace persone Job variable with the actual variable name)
+def get_jobs(request):
+    jobs = list(Job.objects.values())
+    return JsonResponse(jobs, safe=False)
+
+
+@csrf_exempt
+def delete_job(request, job_id):
+    if request.method == "DELETE":
+        try:
+            job = Job.objects.get(id=job_id)
+            job.delete()
+            return JsonResponse({"message": "Job deleted"})
+        except Job.DoesNotExist:
+            return JsonResponse({"error": "Job not found"}, status=404)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)

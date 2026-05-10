@@ -1,22 +1,25 @@
-let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
+fetch("/api/dashboard/")
+  .then(res => res.json())
+  .then(data => {
 
-let totalJobs = document.createElement("p");
-totalJobs.innerText = "Total Jobs: " + jobs.length;
+    let container = document.querySelector(".dashboard-container");
 
-let openJobs = document.createElement("p");
-let openCount = jobs.filter(job => job.status === "open").length;
-openJobs.innerText = "Open Jobs: " + openCount;
+    let totalJobs = document.createElement("p");
+    totalJobs.innerText = "Total Jobs: " + data.total;
 
-let closedJobs = document.createElement("p");
-let closedCount = jobs.filter(job => job.status === "closed").length;
-closedJobs.innerText = "Closed Jobs: " + closedCount;
+    let openJobs = document.createElement("p");
+    openJobs.innerText = "Open Jobs: " + data.open;
 
-let container = document.querySelector(".dashboard-container");
+    let closedJobs = document.createElement("p");
+    closedJobs.innerText = "Closed Jobs: " + data.closed;
 
-container.appendChild(totalJobs);
-container.appendChild(openJobs);
-container.appendChild(closedJobs);
+    container.appendChild(totalJobs);
+    container.appendChild(openJobs);
+    container.appendChild(closedJobs);
 
-[totalJobs, openJobs, closedJobs].forEach(el => {
-  el.style.marginTop = "10px";
-});
+    [totalJobs, openJobs, closedJobs].forEach(el => {
+      el.style.marginTop = "10px";
+    });
+
+  })
+  .catch(err => console.log(err));

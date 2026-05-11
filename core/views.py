@@ -3,6 +3,9 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User 
 from django.db import IntegrityError
 from django.http import JsonResponse
+from .models import Job
+
+
 def home(request):
     return render(request, 'index.html')
 
@@ -14,10 +17,37 @@ def admin_jobs_list(request):
     return render(request, 'admin_jobs_list.html')
 
 def add_job(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        salary = request.POST.get('salary')
+        company = request.POST.get('company')
+        status = request.POST.get('status')
+        years = request.POST.get('years')
+        description = request.POST.get('description')
+
+        Job.objects.create(
+            title=title,
+            salary=salary,
+            company=company,
+            status=status,
+            years=years,
+            description=description
+        )
+        return redirect('admin_jobs_list')
     return render(request, 'add_job.html')
 
-def edit_job(request):
-    return render(request, 'edit_job.html')
+def edit_job(request, job_id):
+    job = get_object_or_404(Job, id=job_id)
+    if request.method == 'POST':
+        job.title = request.POST.get('title')
+        job.salary = request.POST.get('salary')
+        job.company = request.POST.get('company')
+        job.status = request.POST.get('status')
+        job.years = request.POST.get('years')
+        job.description = request.POST.get('description')
+        job.save()
+        return redirect('admin_jobs_list')
+    return render(request, 'edit_job.html', {'job': job})
 
 # User
 def search_jobs(request):

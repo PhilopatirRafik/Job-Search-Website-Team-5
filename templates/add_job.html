@@ -7,71 +7,52 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Add New Job</title>
 </head>
-
 <body>
-
-<nav>
-    <a href="{% url 'admin_dashboard' %}">Home</a>
-    <a href="{% url 'admin_dashboard' %}">Dashboard</a>
-    <a href="{% url 'add_job' %}">Add Job</a>
-    <a href="{% url 'admin_jobs_list' %}">Jobs List</a>
-    <a href="{% url 'login' %}" onclick="localStorage.removeItem('currentUser')">Logout</a>
-</nav>
-
-<div class="admin-form-container">
-    <header>
-        <h1>Add New Job</h1>
-    </header>
-
-    <div class="success-message" id="successMessage">Job Added Successfully</div>
-
-    <form id="addJobForm">
-        <div>
-            <label for="job-title">Job Title</label>
-            <input id="job-title" type="text" required />
-            <span class="error-message" id="titleError"></span>
-        </div>
-
-        <div>
-            <label for="salary">Salary</label>
-            <input id="salary" type="number" step="0.01" required />
-            <span class="error-message" id="salaryError"></span>
-        </div>
-
-        <div>
-            <label for="company">Company Name</label>
-            <input id="company" type="text" required />
-            <span class="error-message" id="companyError"></span>
-        </div>
-
-        <div>
-            <label for="status">Job Status</label>
-            <select id="status" required>
-                <option value="open">Open</option>
-                <option value="closed">Closed</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="years">Years of Experience</label>
-            <input id="years" type="number" step="1" min="0" required />
-            <span class="error-message" id="yearsError"></span>
-        </div>
-
-        <div>
-            <label for="description">Description</label>
-            <textarea id="description" rows="5" required></textarea>
-            <span class="error-message" id="descriptionError"></span>
-        </div>
-
-        <div class="button-group">
-            <button type="submit">Add Job</button>
-            <button type="reset" class="btn-reset">Reset</button>
-        </div>
-    </form>
-</div>
-
-<script src="{% static 'JS/add_job.js' %}"></script>
-
+    <nav>
+        <a href="{% url 'admin_dashboard' %}">Home</a>
+        <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+        <a href="{% url 'add_job' %}">Add Job</a>
+        <a href="{% url 'admin_jobs_list' %}">Jobs List</a>
+        <a href="{% url 'login' %}" onclick="localStorage.removeItem('currentUser')">Logout</a>
+    </nav>
+    <div class="admin-form-container">
+        <header>
+            <h1>Add New Job</h1>
+        </header>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="job-title">Job Title</label>
+                <input id="job-title" name="title" type="text" required />
+            </div>
+            <div>
+                <label for="salary">Salary</label>
+                <input id="salary" name="salary" type="number" step="0.01" required />
+            </div>
+            <div>
+                <label for="company">Company Name</label>
+                <input id="company" name="company" type="text" required />
+            </div>
+            <div>
+                <label for="status">Job Status</label>
+                <select id="status" name="status" required>
+                    <option value="open">Open</option>
+                    <option value="closed">Closed</option>
+                </select>
+            </div>
+            <div>
+                <label for="years">Years of Experience</label>
+                <input id="years" name="years" type="number" step="1" min="0" required />
+            </div>
+            <div>
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="5" required></textarea>
+            </div>
+            <div class="button-group">
+                <button type="submit">Add Job</button>
+                <button type="reset" class="btn-reset">Reset</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

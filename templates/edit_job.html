@@ -7,78 +7,56 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Edit Job</title>
 </head>
-
 <body>
-
-<nav>
-    <a href="{% url 'admin_dashboard' %}">Home</a>
-    <a href="{% url 'admin_dashboard' %}">Dashboard</a>
-    <a href="{% url 'add_job' %}">Add Job</a>
-    <a href="{% url 'admin_jobs_list' %}">Jobs List</a>
-    <a href="{% url 'login' %}" onclick="localStorage.removeItem('currentUser')">Logout</a>
-</nav>
-
-<div class="admin-form-container">
-    <header>
-        <h1>Edit Job</h1>
-    </header>
-
-    <div class="success-message" id="successMessage">Job Updated Successfully</div>
-
-    <form id="editJobForm">
-
-        <div>
-            <label>Job ID</label>
-            <input type="text" id="jobId" readonly>
-        </div>
-
-        <div>
-            <label>Job Title</label>
-            <input type="text" id="jobTitle" required>
-            <span class="error-message" id="titleError"></span>
-        </div>
-
-        <div>
-            <label>Salary</label>
-            <input type="number" id="salary" step="0.01" required>
-            <span class="error-message" id="salaryError"></span>
-        </div>
-
-        <div>
-            <label>Company Name</label>
-            <input type="text" id="company" required>
-            <span class="error-message" id="companyError"></span>
-        </div>
-
-        <div>
-            <label>Job Status</label>
-            <select id="status" required>
-                <option value="open">Open</option>
-                <option value="closed">Closed</option>
-            </select>
-        </div>
-
-        <div>
-            <label>Years of Experience</label>
-            <input type="number" id="years" step="1" required>
-            <span class="error-message" id="yearsError"></span>
-        </div>
-
-        <div>
-            <label>Description</label>
-            <textarea id="description" rows="5" required></textarea>
-            <span class="error-message" id="descriptionError"></span>
-        </div>
-
-        <div class="button-group">
-            <button type="submit">Update Job</button>
-            <button type="button" class="btn-delete" id="deleteBtn">Delete</button>
-        </div>
-
-    </form>
-</div>
-
-<script src="{% static 'JS/edit_job.js' %}"></script>
-
+    <nav>
+        <a href="{% url 'admin_dashboard' %}">Home</a>
+        <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+        <a href="{% url 'add_job' %}">Add Job</a>
+        <a href="{% url 'admin_jobs_list' %}">Jobs List</a>
+        <a href="{% url 'login' %}" onclick="localStorage.removeItem('currentUser')">Logout</a>
+    </nav>
+    <div class="admin-form-container">
+        <header>
+            <h1>Edit Job</h1>
+        </header>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label>Job ID</label>
+                <input type="text" name="job_id" value="{{ job.id }}" readonly>
+            </div>
+            <div>
+                <label>Job Title</label>
+                <input type="text" name="title" value="{{ job.title }}" required>
+            </div>
+            <div>
+                <label>Salary</label>
+                <input type="number" name="salary" value="{{ job.salary }}" step="0.01" required>
+            </div>
+            <div>
+                <label>Company Name</label>
+                <input type="text" name="company" value="{{ job.company }}" required>
+            </div>
+            <div>
+                <label>Job Status</label>
+                <select name="status" required>
+                    <option value="open" {% if job.status= ='open' %}selected{% endif %}>Open</option>
+                    <option value="closed" {% if job.status= ='closed' %}selected{% endif %}>Closed</option>
+                </select>
+            </div>
+            <div>
+                <label>Years of Experience</label>
+                <input type="number" name="years" value="{{ job.years }}" step="1" required>
+            </div>
+            <div>
+                <label>Description</label>
+                <textarea name="description" rows="5" required>{{ job.description }}</textarea>
+            </div>
+            <div class="button-group">
+                <button type="submit">Save Changes</button>
+                <a href="{% url 'admin_jobs_list' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

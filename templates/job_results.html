@@ -34,47 +34,43 @@
     </section>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-    let applications = JSON.parse(localStorage.getItem("applications")) || []; 
-    
-    let tableBody = document.getElementById("jobsList");
-    
+    document.addEventListener("DOMContentLoaded", async function() {
+    const tableBody = document.getElementById("jobsList");
+
     const urlParams = new URLSearchParams(window.location.search);
-    const filterTitle = urlParams.get('title');
-    const filterExp = urlParams.get('exp');
+    const title = urlParams.get("title") || "";
+    const exp = urlParams.get("exp") || "";
 
-    let filteredJobs = jobs;
+    try {
+        const response = await fetch(`/api/jobs/search/?title=${encodeURIComponent(title)}&exp=${encodeURIComponent(exp)}`);
+        const jobs = await response.json();
 
-    if (filterTitle && filterTitle.trim() !== "") {
-        filteredJobs = filteredJobs.filter(j => j.title.toLowerCase().includes(filterTitle.toLowerCase()));
-    }
-    if (filterExp && filterExp.trim() !== "") {
-        filteredJobs = filteredJobs.filter(j => parseInt(j.years) <= parseInt(filterExp));
-    }
+        if (jobs.length === 0) {
+            tableBody.innerHTML = "<tr><td colspan='6'>No jobs found.</td></tr>";
+            return;
+        }
 
-    if (filteredJobs.length === 0) {
-        tableBody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>No jobs found.</td></tr>";
-    } else {
-        tableBody.innerHTML = "";
-        filteredJobs.forEach(job => {
-            const isApplied = applications.some(app => app.jobId == job.id);
-            
-            let cleanId = String(job.id).replace('job_', ''); 
-            let detailUrl = "{% url 'job_details' %}?id=" + cleanId;
-            
-            let row = `<tr>
-                <td>${job.title} ${isApplied ? '<b style="color:green; margin-left:5px;">(Applied)</b>' : ''}</td>
-                <td>${job.company}</td>
-                <td>${job.years} Years</td>
-                <td>$${job.salary}</td>
-                <td>${job.status}</td>
-                <td><a href="${detailUrl}" class="button" style="padding: 5px 10px; font-size: 12px;">View</a></td>
-            </tr>`;
+        jobs.forEach(job => {
+            let row = `
+                <tr>
+                    <td>${job.title}</td>
+                    <td>${job.company}</td>
+                    <td>${job.years} Years</td>
+                    <td>$${job.salary}</td>
+                    <td>${job.status}</td>
+                    <td>
+                        <a href="/details/?id=${job.id}" class="button">View</a>
+                    </td>
+                </tr>
+            `;
             tableBody.innerHTML += row;
         });
-      }
-  });
+
+    } catch (error) {
+        tableBody.innerHTML = "<tr><td colspan='6'>Error loading jobs.</td></tr>";
+    }
+});
+
   </script>
 </body>
 </html>

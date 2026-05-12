@@ -38,13 +38,15 @@
     </section>
 
     <script>
-        document.getElementById("searchForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const title = document.getElementById("job_title").value;
-            const exp = document.getElementById("experience_years").value;
-            
-            window.location.href = `/results/?title=${title}&exp=${exp}`;
-        });
+    document.getElementById("searchForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const title = document.getElementById("job_title").value;
+    const exp = document.getElementById("experience_years").value;
+
+    window.location.href = `/results/?title=${encodeURIComponent(title)}&exp=${encodeURIComponent(exp)}`;
+    });
+
     </script>
 </body>
 </html>

@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.http import JsonResponse
 from .models import Job
+from django.views.decorators.csrf import csrf_exempt 
+from django.shortcuts import get_object_or_404    
+import json 
 
 
 def home(request):
@@ -143,3 +146,29 @@ def delete_job(request, job_id):
             return JsonResponse({"error": "Job not found"}, status=404)
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+def search_jobs_api(request): 
+    title = request.GET.get('title')
+    exp = request.GET.get('experience')
+    jobs = Job.objects.filter(status='open')
+    if title:
+        jobs = jobs.filter(title__icontains=title)
+    if exp:
+        jobs = jobs.filter(years__lte=exp)
+    jobs_data = list(jobs.values())
+    return JsonResponse(jobs_data, safe=False)
+
+
+def job_details_api(request , job_id): 
+    job = get_object_or_404(Job, id=job_id)
+    data = {
+        "id": job.id,
+        "title": job.title,
+        "salary": job.salary,
+        "company": job.company,
+        "status": job.status,
+        "years": job.years,
+        "description": job.description
+    }
+    return JsonResponse(data)

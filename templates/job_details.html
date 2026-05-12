@@ -16,44 +16,43 @@
         </div>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const jobId = urlParams.get('id');
-        const jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-        const applications = JSON.parse(localStorage.getItem("applications")) || [];const job = jobs.find(j => String(j.id).replace('job_', '') == String(jobId).replace('job_', ''));
-        const container = document.getElementById("detailsContainer");
-        if (job) {
-            const isApplied = applications.some(app => app.jobId === job.id);
-            container.innerHTML = `
-                <h1>Job Details: ${job.title}</h1>
-                <div class="dashboard-container">
-                    <p><strong>Company:</strong> ${job.company}</p>
-                    <p><strong>Experience:</strong> ${job.years} Years</p>
-                    <p><strong>Salary:</strong> $${job.salary}</p>
-                    <p><strong>Status:</strong> ${job.status}</p>
-                    <p><strong>Description:</strong> ${job.description}</p>
-                    <br>
-                    <div id="actionArea"></div> <br>
-                    <a href="{% url 'job_results' %}">Back to results</a>
-                </div>`;
+    document.addEventListener("DOMContentLoaded", async function() {
+    const tableBody = document.getElementById("jobsList");
 
-            const actionArea = document.getElementById("actionArea");
+    const urlParams = new URLSearchParams(window.location.search);
+    const title = urlParams.get("title") || "";
+    const exp = urlParams.get("exp") || "";
 
-            if (job.status === "closed") {
-                actionArea.innerHTML = `<p style="color:red; font-weight:bold; border: 1px solid red; padding: 10px;">This job is CLOSED.</p>`;
-            } else if (isApplied) {
-                actionArea.innerHTML = `<button class="button" disabled style="background-color:gray; cursor: not-allowed;">Already Applied</button>`;
-            } else {
-                actionArea.innerHTML = `<button class="button" id="applyBtn">Apply for Job</button>`;
-                
-                document.getElementById("applyBtn").addEventListener("click", function() {
-                    window.location.href = `/apply/?id=${job.id}`;
-                });
-            }
-        } else {
-            container.innerHTML = "<h2>Job not found!</h2>";
+    try {
+        const response = await fetch(`/api/jobs/search/?title=${encodeURIComponent(title)}&exp=${encodeURIComponent(exp)}`);
+        const jobs = await response.json();
+
+        if (jobs.length === 0) {
+            tableBody.innerHTML = "<tr><td colspan='6'>No jobs found.</td></tr>";
+            return;
         }
-    });
+
+        jobs.forEach(job => {
+            let row = `
+                <tr>
+                    <td>${job.title}</td>
+                    <td>${job.company}</td>
+                    <td>${job.years} Years</td>
+                    <td>$${job.salary}</td>
+                    <td>${job.status}</td>
+                    <td>
+                        <a href="/details/?id=${job.id}" class="button">View</a>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+
+    } catch (error) {
+        tableBody.innerHTML = "<tr><td colspan='6'>Error loading jobs.</td></tr>";
+    }
+});
+
     </script>
 </body>
 </html>

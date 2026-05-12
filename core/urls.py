@@ -17,4 +17,6 @@ urlpatterns = [
     path('applied-jobs/', views.user_applied_jobs, name='user_applied_jobs'),
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup, name='signup'),
+    path('api/jobs/search/', views.search_jobs_api, name='search_jobs_api'), 
+    path('api/jobs/details/<int:job_id>/', views.job_details_api, name='job_details_api'), 
 ]

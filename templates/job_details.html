@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Job Details</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -12,47 +13,47 @@
         <a href="{% url 'user_applied_jobs' %}">Applied Jobs</a>
         <a href="{% url 'login' %}" onclick="localStorage.removeItem('currentUser')">Logout</a>
     </nav>
-    <div class="job-container" id="detailsContainer">
-        </div>
+
+    <div class="job-details-container" id="detailsContainer">
+        Loading...
+    </div>
 
     <script>
-    document.addEventListener("DOMContentLoaded", async function() {
-    const tableBody = document.getElementById("jobsList");
+        document.addEventListener("DOMContentLoaded", async function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobId = urlParams.get("id");
+            const container = document.getElementById("detailsContainer");
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const title = urlParams.get("title") || "";
-    const exp = urlParams.get("exp") || "";
+            if (!jobId) {
+                container.innerHTML = '<p style="color:red;">No job specified.</p>';
+                return;
+            }
 
-    try {
-        const response = await fetch(`/api/jobs/search/?title=${encodeURIComponent(title)}&exp=${encodeURIComponent(exp)}`);
-        const jobs = await response.json();
+            try {
+                const response = await fetch(`/api/jobs/details/${jobId}/`);
+                if (!response.ok) throw new Error("Job not found");
+                const job = await response.json();
 
-        if (jobs.length === 0) {
-            tableBody.innerHTML = "<tr><td colspan='6'>No jobs found.</td></tr>";
-            return;
-        }
+                container.innerHTML = `
+                        <div class="job-card">
+                            <h2>${job.title}</h2>
+                            <p><strong>Company:</strong> ${job.company}</p>
+                            <p><strong>Experience:</strong> ${job.years} years</p>
+                            <p><strong>Salary:</strong> $${job.salary}</p>
+                            <p><strong>Status:</strong> ${job.status}</p>
+                            <p><strong>Description:</strong> ${job.description}</p>
+                            <button id="applyBtn" class="apply-btn">Apply Now</button>
+                        </div>
+                    `;
 
-        jobs.forEach(job => {
-            let row = `
-                <tr>
-                    <td>${job.title}</td>
-                    <td>${job.company}</td>
-                    <td>${job.years} Years</td>
-                    <td>$${job.salary}</td>
-                    <td>${job.status}</td>
-                    <td>
-                        <a href="/details/?id=${job.id}" class="button">View</a>
-                    </td>
-                </tr>
-            `;
-            tableBody.innerHTML += row;
+                document.getElementById("applyBtn").addEventListener("click", function () {
+                    window.location.href = `/apply/?id=${job.id}`;
+                });
+
+            } catch (error) {
+                container.innerHTML = '<p style="color:red;">Error loading job details.</p>';
+            }
         });
-
-    } catch (error) {
-        tableBody.innerHTML = "<tr><td colspan='6'>Error loading jobs.</td></tr>";
-    }
-});
-
     </script>
 </body>
 </html>

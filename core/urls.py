@@ -19,4 +19,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('api/jobs/search/', views.search_jobs_api, name='search_jobs_api'), 
     path('api/jobs/details/<int:job_id>/', views.job_details_api, name='job_details_api'), 
+    path('api/apply/', views.submit_application, name='submit_application'),
+    path('api/applications/', views.get_applications, name='get_applications'),
+    path('api/applications/delete/<int:app_id>/', views.delete_application, name='delete_application'),
 ]

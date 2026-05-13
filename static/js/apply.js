@@ -1,4 +1,4 @@
-// ================= LOAD JOBS =================
+// ================= URL PARAM =================
 const urlParams = new URLSearchParams(window.location.search);
 const preSelectedId = urlParams.get('id');
 
@@ -6,56 +6,38 @@ function resetForm() {
   let jobValue = document.getElementById("jobSelect").value;
   document.getElementById("applyForm").reset();
   document.getElementById("jobSelect").value = jobValue;
-  }
-  
-window.onload = function () {
-  const urlParams = new URLSearchParams(window.location.search);
-  const preSelectedId = urlParams.get('id');  
-  let jobs = JSON.parse(localStorage.getItem("jobs")) || [];
-  let applications = JSON.parse(localStorage.getItem("applications")) || [];
+}
+
+
+// ================= LOAD JOB =================
+window.onload = async function () {
   let select = document.getElementById("jobSelect");
 
-  if (jobs.length === 0) {
-    let option = document.createElement("option");
-    option.textContent = "No jobs available";
-    option.disabled = true;
-    select.appendChild(option);
+  if (!preSelectedId) {
+    select.value = "No job selected";
     return;
   }
 
-    let job = jobs.find(j => j.id === preSelectedId);
-    if (job) {
-    select.value = job.title + " - " + job.company;
-    } else {
-    select.value = "No job selected";
-    }
-  jobs.forEach((job, index) => {
-    let option = document.createElement("option");
-    option.value = job.id;
-    let isApplied = applications.some(app => String(app.jobIndex) === String(index));
-    
-    let isClosed = (job.status === "Closed" || job.status === "closed");
+  try {
+    const response = await fetch(`/api/jobs/details/${preSelectedId}/`);
+    const job = await response.json();
 
-    if (isApplied) {
-        option.textContent = job.title + " - " + job.company + " (Already Applied)";
-        option.disabled = true;
-    } else if (isClosed) {
-        option.textContent = job.title + " - " + job.company + " (Closed)";
-        option.disabled = true;
+    if (job.id) {
+      select.value = job.title + " - " + job.company;
     } else {
-        option.textContent = job.title + " - " + job.company;
+      select.value = "No job selected";
     }
 
-    select.appendChild(option);
-  });
+  } catch (error) {
+    select.value = "Error loading job";
+  }
 };
 
+
 // ================= FORM SUBMIT =================
-document.getElementById("applyForm").addEventListener("submit", function (e) {
+document.getElementById("applyForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  // values
-  let jobId = preSelectedId;
   let fullname = document.getElementById("fullname").value.trim();
   let email = document.getElementById("email").value.trim();
   let phone = document.getElementById("phone").value.trim();
@@ -63,17 +45,14 @@ document.getElementById("applyForm").addEventListener("submit", function (e) {
   let cv = document.getElementById("cv").value.trim();
   let cover = document.getElementById("cover_letter").value.trim();
 
-  // error elements
   let nameError = document.getElementById("nameError");
   let emailError = document.getElementById("emailError");
 
-  // reset errors
   nameError.textContent = "";
   emailError.textContent = "";
 
-  // ================= VALIDATION =================
-
-  if (!jobId) {
+  // validation
+  if (!preSelectedId) {
     alert("Please select a job!");
     return;
   }
@@ -84,6 +63,7 @@ document.getElementById("applyForm").addEventListener("submit", function (e) {
   }
 
   let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
   if (!email.match(emailPattern)) {
     emailError.textContent = "Enter a valid email";
     return;
@@ -94,33 +74,41 @@ document.getElementById("applyForm").addEventListener("submit", function (e) {
     return;
   }
 
-  // ================= SAVE =================
+  // send to django backend
+  try {
+    const response = await fetch("/api/apply/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        jobId: preSelectedId,
+        fullname: fullname,
+        email: email,
+        phone: phone,
+        experience: experience,
+        cv: cv,
+        cover_letter: cover
+      })
+    });
 
-  let applications = JSON.parse(localStorage.getItem("applications")) || [];
+    const result = await response.json();
 
-  applications.push({
-    jobId: jobId,
-    fullname: fullname,
-    email: email,
-    phone: phone,
-    experience: experience,
-    cv: cv,
-    cover_letter: cover,
-    date: new Date().toLocaleString()
-  });
+    if (response.ok) {
+      let successMsg = document.getElementById("successMsg");
+      successMsg.style.display = "block";
 
-  localStorage.setItem("applications", JSON.stringify(applications));
+      document.getElementById("applyForm").reset();
 
-  // ================= SUCCESS =================
+      setTimeout(() => {
+        window.location.href = "/applied-jobs/";
+      }, 1500);
 
-  let successMsg = document.getElementById("successMsg");
-  successMsg.style.display = "block";
+    } else {
+      alert(result.error || "Something went wrong");
+    }
 
-  // reset form
-  document.getElementById("applyForm").reset();
-
-  // redirect
-  setTimeout(() => {
-    window.location.href = window.location.origin + "/applied-jobs/";
-  }, 1500);
+  } catch (error) {
+    alert("Server error");
+  }
 });

@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User 
 from django.db import IntegrityError
 from django.http import JsonResponse
-from .models import Job
+from .models import Job, Application
 from django.views.decorators.csrf import csrf_exempt 
 from django.shortcuts import get_object_or_404    
 import json 
@@ -172,3 +172,68 @@ def job_details_api(request , job_id):
         "description": job.description
     }
     return JsonResponse(data)
+# ================= APPLICATION APIs =================
+
+@csrf_exempt
+def submit_application(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+
+            job = Job.objects.get(id=data.get("jobId"))
+
+            application = Application.objects.create(
+                job=job,
+                fullname=data.get("fullname"),
+                email=data.get("email"),
+                phone=data.get("phone"),
+                experience=data.get("experience") or 0,
+                cv=data.get("cv"),
+                cover_letter=data.get("cover_letter")
+            )
+
+            return JsonResponse({
+                "message": "Application submitted successfully",
+                "id": application.id
+            })
+
+        except Job.DoesNotExist:
+            return JsonResponse({"error": "Job not found"}, status=404)
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+def get_applications(request):
+    applications = Application.objects.all().select_related('job')
+
+    data = []
+
+    for app in applications:
+        data.append({
+            "id": app.id,
+            "job_title": app.job.title,
+            "company": app.job.company,
+            "fullname": app.fullname,
+            "email": app.email,
+            "experience": app.experience,
+            "date": app.date
+        })
+
+    return JsonResponse(data, safe=False)
+
+
+@csrf_exempt
+def delete_application(request, app_id):
+    if request.method == "DELETE":
+        try:
+            application = Application.objects.get(id=app_id)
+            application.delete()
+            return JsonResponse({"message": "Application deleted successfully"})
+
+        except Application.DoesNotExist:
+            return JsonResponse({"error": "Application not found"}, status=404)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)

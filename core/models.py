@@ -15,3 +15,15 @@ class Job(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='open')
     def __str__(self):
         return self.title
+class Application(models.Model):
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    fullname = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True)
+    experience = models.IntegerField(default=0)
+    cv = models.URLField(blank=True)
+    cover_letter = models.TextField(blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.fullname

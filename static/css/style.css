@@ -41,6 +41,7 @@ h1 {
 .dashboard-container {
     padding: 30px;
 }
+
 .job-container {
     padding: 20px;
 }
@@ -63,25 +64,25 @@ h1 {
     transition: 0.3s;
 }
 
-.card:hover {
-    background-color: #356d59;
-    transform: translateY(-5px);
-}
+    .card:hover {
+        background-color: #356d59;
+        transform: translateY(-5px);
+    }
 
-.card a.button {
-    background-color: white;
-    color: #468970;
-    text-decoration: none;
-    padding: 6px 14px;
-    border-radius: 20px;
-    display: inline-block;
-    transition: 0.3s;
-    width: fit-content;
-}
+    .card a.button {
+        background-color: white;
+        color: #468970;
+        text-decoration: none;
+        padding: 6px 14px;
+        border-radius: 20px;
+        display: inline-block;
+        transition: 0.3s;
+        width: fit-content;
+    }
 
-.card a.button:hover {
-    background-color: #ddd;
-}
+        .card a.button:hover {
+            background-color: #ddd;
+        }
 
 /* ===== FORM ===== */
 form {
@@ -210,8 +211,21 @@ tr:hover {
 }
 
 .btn-reset {
-    background-color: #999;
+    background-color: #6c757d; /* رمادي غامق */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.2s;
+    border: none;
+    cursor: pointer;
 }
+
+    .btn-reset:hover {
+        background-color: #5a6268;
+        transform: translateY(-1px);
+    }
 
 .btn-delete {
     background-color: crimson;
@@ -228,8 +242,7 @@ footer {
 }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 768px) 
-{
+@media (max-width: 768px) {
     .admin-form-container {
         width: 95%;
     }
@@ -259,18 +272,18 @@ footer {
     transition: 0.3s;
 }
 
-.job-card:hover {
-    transform: translateY(-5px);
-}
+    .job-card:hover {
+        transform: translateY(-5px);
+    }
 
-.job-card p {
-    margin-bottom: 12px;
-    font-size: 15px;
-}
+    .job-card p {
+        margin-bottom: 12px;
+        font-size: 15px;
+    }
 
-.job-card strong {
-    color: #468970;
-}
+    .job-card strong {
+        color: #468970;
+    }
 
 /* buttons inside job card */
 .apply-btn,
@@ -290,18 +303,18 @@ footer {
     color: white;
 }
 
-.apply-btn:hover {
-    background-color: #356d59;
-}
+    .apply-btn:hover {
+        background-color: #356d59;
+    }
 
 .back-btn {
     background-color: #999;
     color: white;
 }
 
-.back-btn:hover {
-    opacity: 0.8;
-}
+    .back-btn:hover {
+        opacity: 0.8;
+    }
 
 
 /* ===== JOB DETAILS LAYOUT IMPROVEMENT ===== */
@@ -319,13 +332,13 @@ footer {
     margin-bottom: 15px;
 }
 
-.job-info p {
-    background: none;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    font-size: 15px;
-}
+    .job-info p {
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        font-size: 15px;
+    }
 
 .job-description {
     background-color: white;
@@ -347,3 +360,83 @@ footer {
     margin-top: 10px;
     margin-bottom: 30px;
 }
+
+
+
+.btn-cancel {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+    .btn-cancel:hover {
+        background-color: #5a6268;
+        transform: translateY(-1px);
+    }
+
+
+
+
+
+
+.btn-primary {
+    background: #468970;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+    .btn-primary:hover {
+        background: #2d6b56;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+    .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+.btn-reset {
+    background: #6c757d;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .btn-reset:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }

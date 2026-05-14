@@ -50,16 +50,17 @@ h1 {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 20px;
+    width: 55%;
 }
 
 .card {
     background-color: #468970;
     color: white;
-    padding: 25px;
+    padding: 15px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     box-shadow: 0 5px 10px gray;
     transition: 0.3s;
 }

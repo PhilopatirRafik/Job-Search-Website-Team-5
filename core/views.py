@@ -19,38 +19,128 @@ def admin_dashboard(request):
 def admin_jobs_list(request):
     return render(request, 'admin_jobs_list.html')
 
-def add_job(request):
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        salary = request.POST.get('salary')
-        company = request.POST.get('company')
-        status = request.POST.get('status')
-        years = request.POST.get('years')
-        description = request.POST.get('description')
 
-        Job.objects.create(
-            title=title,
-            salary=salary,
-            company=company,
-            status=status,
-            years=years,
-            description=description
-        )
-        return redirect('admin_jobs_list')
-    return render(request, 'add_job.html')
+def add_job(request):
+    errors = {}
+    form_data = {}
+    
+    if request.method == 'POST':
+        title = request.POST.get('title', '').strip()
+        salary = request.POST.get('salary')
+        company = request.POST.get('company', '').strip()
+        years = request.POST.get('years')
+        description = request.POST.get('description', '').strip()
+        status = request.POST.get('status')
+        
+        form_data = {
+            'title': title,
+            'salary': salary,
+            'company': company,
+            'years': years,
+            'description': description,
+            'status': status,
+        }
+        
+        # Server Side Validation
+        if not title or len(title) < 3:
+            errors['title'] = 'Title must be at least 3 characters'
+        
+        if not salary:
+            errors['salary'] = 'Salary is required'
+        else:
+            try:
+                salary_val = float(salary)
+                if salary_val <= 0:
+                    errors['salary'] = 'Salary must be greater than 0'
+            except (ValueError, TypeError):
+                errors['salary'] = 'Invalid salary value'
+        
+        if not company:
+            errors['company'] = 'Company name is required'
+        
+        if not years:
+            errors['years'] = 'Years of experience is required'
+        else:
+            try:
+                years_val = int(years)
+                if years_val < 0:
+                    errors['years'] = 'Years cannot be negative'
+            except (ValueError, TypeError):
+                errors['years'] = 'Invalid years value'
+        
+        if not description:
+            errors['description'] = 'Description is required'
+        elif len(description) < 10:
+            errors['description'] = 'Description must be at least 10 characters'
+        
+        if not errors:
+            Job.objects.create(
+                title=title,
+                salary=salary,
+                company=company,
+                status=status,
+                years=years,
+                description=description
+            )
+            return redirect('admin_jobs_list')
+    
+    return render(request, 'add_job.html', {'errors': errors, 'form_data': form_data})
 
 def edit_job(request, job_id):
     job = get_object_or_404(Job, id=job_id)
+    errors = {}
+    
     if request.method == 'POST':
-        job.title = request.POST.get('title')
-        job.salary = request.POST.get('salary')
-        job.company = request.POST.get('company')
-        job.status = request.POST.get('status')
-        job.years = request.POST.get('years')
-        job.description = request.POST.get('description')
-        job.save()
-        return redirect('admin_jobs_list')
-    return render(request, 'edit_job.html', {'job': job})
+        title = request.POST.get('title', '').strip()
+        salary = request.POST.get('salary')
+        company = request.POST.get('company', '').strip()
+        years = request.POST.get('years')
+        description = request.POST.get('description', '').strip()
+        status = request.POST.get('status')
+        
+        # Server Side Validation
+        if not title or len(title) < 3:
+            errors['title'] = 'Title must be at least 3 characters'
+        
+        if not salary:
+            errors['salary'] = 'Salary is required'
+        else:
+            try:
+                salary_val = float(salary)
+                if salary_val <= 0:
+                    errors['salary'] = 'Salary must be greater than 0'
+            except (ValueError, TypeError):
+                errors['salary'] = 'Invalid salary value'
+        
+        if not company:
+            errors['company'] = 'Company name is required'
+        
+        if not years:
+            errors['years'] = 'Years of experience is required'
+        else:
+            try:
+                years_val = int(years)
+                if years_val < 0:
+                    errors['years'] = 'Years cannot be negative'
+            except (ValueError, TypeError):
+                errors['years'] = 'Invalid years value'
+        
+        if not description:
+            errors['description'] = 'Description is required'
+        elif len(description) < 10:
+            errors['description'] = 'Description must be at least 10 characters'
+        
+        if not errors:
+            job.title = title
+            job.salary = salary
+            job.company = company
+            job.status = status
+            job.years = years
+            job.description = description
+            job.save()
+            return redirect('admin_jobs_list')
+    
+    return render(request, 'edit_job.html', {'job': job, 'errors': errors})
 
 # User
 def search_jobs(request):

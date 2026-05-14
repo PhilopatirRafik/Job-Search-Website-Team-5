@@ -166,20 +166,47 @@ tr:hover {
 }
 
 /* actions */
-.actions a {
-    padding: 5px 10px;
-    border-radius: 20px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
+.actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
 }
 
+.actions a,
+.actions button {
+    min-width: 60px;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+}
+
+/* Edit Button */
 .actions .edit {
     background-color: #468970;
 }
 
+.actions .edit:hover {
+    background-color: #356d59;
+    transform: translateY(-2px);
+}
+
+/* Delete Button */
 .actions .delete {
     background-color: crimson;
+    
+}
+
+.actions .delete:hover {
+    background-color: darkred;
+    transform: translateY(-2px);
 }
 
 /* ===== ADMIN FORM ===== */
